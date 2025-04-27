@@ -18,7 +18,7 @@ MonoBehaviour:
     - {fileID: 1204012758654713070, guid: a26a42323b19ef644bc1d0b68e1c4f05, type: 3}
     - {fileID: 5100561676509579752, guid: 08fddbb14f6da9c4092718f94ab4a198, type: 3}
     defaultWindow: {fileID: 1204012758654713070, guid: a26a42323b19ef644bc1d0b68e1c4f05, type: 3}
-    transitionWindow: {fileID: 0}
+    transitionWindow: {fileID: 6074149996065963569, guid: d3ab062d3e80aae4d9e6f475f8084d7c, type: 3}
     canvasScalerBaseResolution: {x: 1920, y: 1080}
     renderMode: 0
     sortingOffset: 100
