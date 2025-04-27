@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: CanvasWindowsSettingsInstaller
   m_EditorClassIdentifier: 
   canvasWindowsSettings:
-    sceneRootName: Main
-    canvasWindows: []
-    defaultWindow: {fileID: 0}
+    sceneRootName: Canvas
+    canvasWindows:
+    - {fileID: 1204012758654713070, guid: a26a42323b19ef644bc1d0b68e1c4f05, type: 3}
+    - {fileID: 5100561676509579752, guid: 08fddbb14f6da9c4092718f94ab4a198, type: 3}
+    defaultWindow: {fileID: 1204012758654713070, guid: a26a42323b19ef644bc1d0b68e1c4f05, type: 3}
     transitionWindow: {fileID: 0}
-    canvasScalerBaseResolution: {x: 1080, y: 1920}
+    canvasScalerBaseResolution: {x: 1920, y: 1080}
     renderMode: 0
     sortingOffset: 100
     planeDistance: 0.3
