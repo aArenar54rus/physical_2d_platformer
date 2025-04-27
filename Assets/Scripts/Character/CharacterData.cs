@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 namespace Arenar.Character
 {
     [CreateAssetMenu(fileName = "PlayerCharacterData", menuName = "Character Data/Player Character Data", order = 51)]
@@ -11,11 +10,11 @@ namespace Arenar.Character
         [SerializeField]
         private float speed;
         [SerializeField]
-        private float jumpMight;
+        private float jumpForce;
 
 
         public int Health => health;
         public float Speed => speed;
-        public float JumpMight => jumpMight;
+        public float JumpForce => jumpForce;
     }
 }

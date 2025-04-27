@@ -26,10 +26,10 @@ namespace Arenar.Character
 
 
         [Inject]
-        public void Construct(ICharacterEntity characterOwner, ICharacterDataStorage<CharacterData> characterDataStorage)
+        public void Construct(ICharacterEntity characterOwner, ICharacterDataStorage<CharacterDataStorage> characterDataStorage)
         {
             this.characterOwner = characterOwner;
-            characterData = characterDataStorage.Data;
+            this.characterData = characterDataStorage.Data.CharacterData;
         }
 
         public void GetDamage(int damage = 1)
