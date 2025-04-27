@@ -1,12 +1,11 @@
 using Arenar.Character;
-using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 
 namespace Arenar.Services.Creator
 {
-	public class CharacterFactory : MonoBehaviour
+	public class CharacterFactory
 	{
 		[SerializeField]
 		private KittyCharacter kittyCharacter;
@@ -17,9 +16,6 @@ namespace Arenar.Services.Creator
 		private readonly TickableManager tickableManager;
 		private readonly InitializableManager initializableManager;
 		
-		private Dictionary<CharacterType, List<ICharacterEntity>> activeCharacters = new();
-		private Dictionary<CharacterType, Queue<ICharacterEntity>> deactiveCharacters = new();
-
 
 		public CharacterFactory(DiContainer container,
 								TickableManager tickableManager,
@@ -33,33 +29,19 @@ namespace Arenar.Services.Creator
 		}
 
 
-		public void CreateCharacter(CharacterType characterType)
+		public ICharacterEntity Create(CharacterType characterType)
 		{
 			ICharacterEntity characterEntity = null;
+			characterEntity = GameObject.Instantiate(kittyCharacter, characterRoot)
+				.GetComponent<ICharacterEntity>();
+			InstallPostBindings(characterEntity, characterType);
 			
-			if (deactiveCharacters.ContainsKey(characterType))
-			{
-				if (deactiveCharacters[characterType].Count > 0)
-				{
-					characterEntity = deactiveCharacters[characterType].Dequeue();
-				}
-			}
-			else
-			{
-				deactiveCharacters.Add(characterType, new Queue<ICharacterEntity>());
-			}
-
-			if (characterEntity == null)
-			{
-				characterEntity = GameObject.Instantiate(kittyCharacter, characterRoot);
-			}
+			return characterEntity;
 		}
 		
-		
-		private void InstallPostBindings(DiContainer subContainer,
-										KittyCharacter characterControl,
-										CharacterType characterEntityType)
+		private void InstallPostBindings(ICharacterEntity characterEntity, CharacterType characterEntityType)
 		{
+			DiContainer subContainer = container.CreateSubContainer();
 			subContainer.ResolveRoots();
             
 			subContainer.Rebind<TickableManager>()
@@ -72,8 +54,8 @@ namespace Arenar.Services.Creator
             
 			subContainer.Bind(typeof(ICharacterEntity),
 					typeof(ICharacterDataStorage<CharacterDataStorage>))
-				.To<KittyCharacter>()
-				.FromInstance(characterControl)
+				.To<ICharacterEntity>()
+				.FromInstance(characterEntity)
 				.AsSingle();
 
 			switch (characterEntityType)
@@ -86,6 +68,8 @@ namespace Arenar.Services.Creator
 					subContainer.Install<EnemyComponentsInstaller>();
 					break;
 			}
+			
+			subContainer.Inject(characterEntity);
 		}
 	}
 }
