@@ -13,6 +13,7 @@ namespace Arenar.Character
         
         private ICharacterLiveComponent liveComponent;
         private ICharacterMovementComponent movementComponent;
+        private ICharacterRaycastComponent raycastComponent;
 
         private bool controlStatus = false;
         
@@ -49,6 +50,7 @@ namespace Arenar.Character
         {
             characterOwner.TryGetCharacterComponent(out liveComponent);
             characterOwner.TryGetCharacterComponent(out movementComponent);
+            characterOwner.TryGetCharacterComponent(out raycastComponent);
             tickableManager.Add(this);
             controlStatus = true;
         }
@@ -68,12 +70,22 @@ namespace Arenar.Character
         {
             if (!controlStatus || liveComponent.Health == 0)
                 return;
-
-            Debug.LogError("MoveAction = " + MoveAction);
-            movementComponent.Move(MoveAction);
             
-            if (JumpAction)
-                movementComponent.Jump();
+            if (raycastComponent.IsGrounded)
+            {
+                float groundAngleRadians = raycastComponent.GroundAngle * Mathf.Deg2Rad;
+                Vector2 groundDirection = new Vector2(Mathf.Cos(groundAngleRadians), Mathf.Sin(groundAngleRadians));
+                Vector2 correctedMove = Vector2.Dot(MoveAction.normalized, groundDirection) * groundDirection;
+                
+                movementComponent.Move(correctedMove);
+                
+                if (JumpAction)
+                    movementComponent.Jump();
+            }
+            else
+            {
+                movementComponent.Move(MoveAction);
+            }
         }
     }
 }

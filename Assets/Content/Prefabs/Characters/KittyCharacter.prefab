@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5992281453637148909}
   - component: {fileID: 8317652016353229066}
   - component: {fileID: 4420108436630084923}
+  - component: {fileID: 731421508404225697}
   m_Layer: 0
   m_Name: KittyCharacter
   m_TagString: Untagged
@@ -52,6 +53,9 @@ MonoBehaviour:
     characterData: {fileID: 11400000, guid: 4400c35039374c143a2e014275b67b61, type: 2}
     characterSpriteRenderer: {fileID: 5992281453637148909}
     characterRigidbody2D: {fileID: 8317652016353229066}
+    groundCheckRadius: 0.75
+    collider2D: {fileID: 4420108436630084923}
+    collisionObserver: {fileID: 731421508404225697}
 --- !u!212 &5992281453637148909
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -166,6 +170,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &731421508404225697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3085946168865933140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3ae042b8830fa94aa1cd8b91f13280d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5801804785865852485
 GameObject:
   m_ObjectHideFlags: 0

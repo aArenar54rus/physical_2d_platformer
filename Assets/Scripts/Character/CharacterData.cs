@@ -10,11 +10,14 @@ namespace Arenar.Character
         [SerializeField]
         private float speed;
         [SerializeField]
+        private float maxHorizontalSpeed;
+        [SerializeField]
         private float jumpForce;
 
 
         public int Health => health;
         public float Speed => speed;
+        public float MaxHorizontalSpeed => maxHorizontalSpeed;
         public float JumpForce => jumpForce;
     }
 }
