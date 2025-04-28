@@ -32,6 +32,8 @@ namespace Arenar.Character
 			characterComponentsPool.Add(typeof(ICharacterControlComponent), controlComponent);
 			Container.BindInstance(controlComponent).AsSingle();
 			Container.Inject(controlComponent);
+			
+			Container.BindInstance(characterComponentsPool).AsSingle();
 		}
 	}
 }

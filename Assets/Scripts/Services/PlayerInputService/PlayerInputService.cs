@@ -26,7 +26,7 @@ namespace Arenar.Services.PlayerInputService
                     if (status)
                     {
                         _playerInput.UI.Enable();
-                        Cursor.lockState = CursorLockMode.None;
+                        //Cursor.lockState = CursorLockMode.None;
                     }
                     else
                     {
@@ -39,7 +39,7 @@ namespace Arenar.Services.PlayerInputService
                     if (status)
                     {
                         _playerInput.Player.Enable();
-                        Cursor.lockState = CursorLockMode.Locked;
+                        //Cursor.lockState = CursorLockMode.Locked;
                     }
                     else
                     {

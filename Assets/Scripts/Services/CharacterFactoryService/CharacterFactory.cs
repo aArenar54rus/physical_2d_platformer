@@ -1,25 +1,28 @@
 using Arenar.Character;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
 
 namespace Arenar.Services.Creator
 {
-	public class CharacterFactory
+	public class CharacterFactory : MonoBehaviour
 	{
 		[SerializeField]
 		private KittyCharacter kittyCharacter;
 
 		private Transform characterRoot;
 		
-		private readonly DiContainer container;
-		private readonly TickableManager tickableManager;
-		private readonly InitializableManager initializableManager;
+		private DiContainer container;
+		private TickableManager tickableManager;
+		private InitializableManager initializableManager;
 		
 
-		public CharacterFactory(DiContainer container,
-								TickableManager tickableManager,
-								InitializableManager initializableManager)
+		[Inject]
+		public void Construct(DiContainer container,
+							TickableManager tickableManager,
+							InitializableManager initializableManager)
 		{
 			this.container = container;
 			this.tickableManager = tickableManager;
@@ -27,8 +30,7 @@ namespace Arenar.Services.Creator
 			
 			characterRoot = new GameObject("CharacterRoot").transform;
 		}
-
-
+		
 		public ICharacterEntity Create(CharacterType characterType)
 		{
 			ICharacterEntity characterEntity = null;
@@ -43,7 +45,7 @@ namespace Arenar.Services.Creator
 		{
 			DiContainer subContainer = container.CreateSubContainer();
 			subContainer.ResolveRoots();
-            
+			
 			subContainer.Rebind<TickableManager>()
 				.FromInstance(tickableManager)
 				.NonLazy();
@@ -51,13 +53,7 @@ namespace Arenar.Services.Creator
 			subContainer.Rebind<InitializableManager>()
 				.FromInstance(initializableManager)
 				.NonLazy();
-            
-			subContainer.Bind(typeof(ICharacterEntity),
-					typeof(ICharacterDataStorage<CharacterDataStorage>))
-				.To<ICharacterEntity>()
-				.FromInstance(characterEntity)
-				.AsSingle();
-
+			
 			switch (characterEntityType)
 			{
 				case CharacterType.Player:
@@ -69,7 +65,16 @@ namespace Arenar.Services.Creator
 					break;
 			}
 			
+			subContainer.Bind(typeof(ICharacterEntity),
+					typeof(ICharacterDataStorage<CharacterDataStorage>))
+				.To<KittyCharacter>()
+				.FromInstance(characterEntity)
+				.AsSingle();
+			
 			subContainer.Inject(characterEntity);
+			var components = subContainer.Resolve<Dictionary<Type, ICharacterComponent>>();
+			foreach (var component in components)
+				subContainer.Inject(component.Value);
 		}
 	}
 }

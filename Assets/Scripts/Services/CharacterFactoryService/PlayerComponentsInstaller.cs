@@ -18,17 +18,20 @@ namespace Arenar.Character
             ICharacterLiveComponent liveComponent = new LiveComponent();
             characterComponentsPool.Add(typeof(ICharacterLiveComponent), liveComponent);
             Container.BindInstance(liveComponent).AsSingle();
-            Container.Inject(liveComponent);
+            //Container.Inject(liveComponent);
 
             ICharacterMovementComponent movementComponent = new PhysicalCharacterMovementComponent();
             characterComponentsPool.Add(typeof(ICharacterMovementComponent), movementComponent);
             Container.BindInstance(movementComponent).AsSingle();
-            Container.Inject(movementComponent);
+            //Container.Inject(movementComponent);
 
             ICharacterControlComponent controlComponent = new CharacterInputControlComponent();
             characterComponentsPool.Add(typeof(ICharacterControlComponent), controlComponent);
             Container.BindInstance(controlComponent).AsSingle();
-            Container.Inject(controlComponent);
+            //Container.Inject(controlComponent);
+            
+            Container.Bind<Dictionary<Type, ICharacterComponent>>().
+                FromInstance(characterComponentsPool).AsSingle();
         }
     }
 }

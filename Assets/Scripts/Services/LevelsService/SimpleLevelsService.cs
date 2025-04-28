@@ -24,7 +24,7 @@ namespace Arenar.Services.LevelsService
         
         public void LoadLevel(int levelIndex, Action<SceneContext> onComplete = null)
         {
-            if (lastLevelIndex <= 0)
+            if (lastLevelIndex > 0)
             {
                 SceneManager.UnloadScene(LOCATION_NAME + lastLevelIndex);
             }

@@ -5,10 +5,14 @@ namespace Arenar.Services.UI
     public class MainMenuWindowController : CanvasWindowController
     {
         private MainMenuWindow mainMenuWindow;
-        
-        
-        public MainMenuWindowController(IPlayerInputService playerInputService)
-            : base(playerInputService) {}
+        private IGameService gameService;
+
+
+        public MainMenuWindowController(IPlayerInputService playerInputService, IGameService gameService)
+            : base(playerInputService)
+        {
+            this.gameService = gameService;
+        }
 
 
         public override void Initialize(ICanvasService canvasService)
@@ -31,7 +35,15 @@ namespace Arenar.Services.UI
         
         private void StartGameButtonHandler()
         {
+            GameData newGameData = new GameData();
+            newGameData.levelIndex = 1;
             
+            canvasService.TransitionController.PlayTransition<
+                TransitionCrossFadeCanvasWindowLayerController,MainMenuWindow, GameplayWindow>(true, true,
+                () =>
+                {
+                    gameService.StartGame(newGameData);
+                });
         }
     }
 }

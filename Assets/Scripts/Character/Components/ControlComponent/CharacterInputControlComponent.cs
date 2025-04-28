@@ -69,6 +69,7 @@ namespace Arenar.Character
             if (!controlStatus || liveComponent.Health == 0)
                 return;
 
+            Debug.LogError("MoveAction = " + MoveAction);
             movementComponent.Move(MoveAction);
             
             if (JumpAction)

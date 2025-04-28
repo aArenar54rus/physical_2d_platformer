@@ -44,6 +44,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe55ed81aa8bc744eb8b21d693c90626, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &657596723907119708
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7632108480626231164}
+  - component: {fileID: 8167169345349687907}
+  m_Layer: 0
+  m_Name: Factory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7632108480626231164
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657596723907119708}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4141676683725295648}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8167169345349687907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657596723907119708}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acc84e9e3107a3d4a8eb0292e6947e65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kittyCharacter: {fileID: 7867199325460857360, guid: cc0bb29e77e65db47a0d3eca0c4dc8ba, type: 3}
 --- !u!1 &2907104729736253179
 GameObject:
   m_ObjectHideFlags: 0
@@ -78,6 +123,7 @@ Transform:
   - {fileID: 8178444357626705275}
   - {fileID: 4514399573529541967}
   - {fileID: 4141676683725295648}
+  - {fileID: 2501082885144220650}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &777749248520091430
@@ -99,6 +145,7 @@ MonoBehaviour:
   - {fileID: 3808581353448425812}
   - {fileID: 585891923620976716}
   - {fileID: 1489854438334202809}
+  - {fileID: 4647895958671929270}
   _installerPrefabs: []
   _parentNewObjectsUnderContext: 1
   _editorReflectionBakingCoverageMode: 0
@@ -201,6 +248,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad8096dbc780554e8c42d042167f72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &6493080473467867110
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2501082885144220650}
+  - component: {fileID: 4647895958671929270}
+  m_Layer: 0
+  m_Name: GameService
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2501082885144220650
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6493080473467867110}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4095631212534135836}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4647895958671929270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6493080473467867110}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31cac34948b37b848806bce4d35184b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6907115420578064021
 GameObject:
   m_ObjectHideFlags: 0
@@ -230,7 +321,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7632108480626231164}
   m_Father: {fileID: 4095631212534135836}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1489854438334202809
@@ -245,3 +337,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 906e7d2b8f7822942a5bda3a6ecf2dd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterFactory: {fileID: 8167169345349687907}
