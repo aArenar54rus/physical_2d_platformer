@@ -26,7 +26,7 @@ namespace Arenar.Services.LevelsService
         {
             if (lastLevelIndex > 0)
             {
-                SceneManager.UnloadScene(LOCATION_NAME + lastLevelIndex);
+                SceneManager.UnloadSceneAsync(LOCATION_NAME + lastLevelIndex);
             }
 
             lastLevelIndex = levelIndex;
@@ -58,7 +58,8 @@ namespace Arenar.Services.LevelsService
         {
             if (lastLevelIndex > 0)
             {
-                SceneManager.UnloadScene(LOCATION_NAME + lastLevelIndex);
+                SceneManager.UnloadSceneAsync(LOCATION_NAME + lastLevelIndex);
+                lastLevelIndex = -1;
             }
         }
     }

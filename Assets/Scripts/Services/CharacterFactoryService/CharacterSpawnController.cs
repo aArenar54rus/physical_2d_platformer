@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Arenar.Character;
+using System.Linq;
 using UnityEngine;
 
 namespace Arenar.Services.Creator
@@ -102,9 +103,10 @@ namespace Arenar.Services.Creator
         public void ReturnAllCharacters()
         {
             var localActiveCharacters = new Dictionary<CharacterType, List<ICharacterEntity>>(this.activeCharacters);
-            foreach ((CharacterType _, List<ICharacterEntity> entities) in localActiveCharacters)
+            foreach ((CharacterType _, List<ICharacterEntity> entities) in localActiveCharacters.ToList())
             {
-                foreach (var character in entities)
+                List<ICharacterEntity> characters = entities.ToList();
+                foreach (var character in characters)
                     ReturnCharacter(character);
             }
         }
