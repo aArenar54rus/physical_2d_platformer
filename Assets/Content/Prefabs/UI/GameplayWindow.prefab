@@ -170,6 +170,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5698116982772205722}
   - component: {fileID: 5364172332785041506}
+  - component: {fileID: 3733567369041812144}
+  - component: {fileID: 793615852457306177}
   m_Layer: 5
   m_Name: ControlWindowLayer
   m_TagString: Untagged
@@ -214,6 +216,46 @@ MonoBehaviour:
   leftButton: {fileID: 6145948573028587686}
   rightButton: {fileID: 2156989750088032780}
   jumpButton: {fileID: 5281895303610718426}
+--- !u!223 &3733567369041812144
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4861608434649621720}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 2
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!114 &793615852457306177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4861608434649621720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!1 &6236673546154330364
 GameObject:
   m_ObjectHideFlags: 0
@@ -315,7 +357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d54531977ecb194c95e2d3aa7a5d72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ControlPath: <Gamepad>/leftStick/right
+  m_ControlPath: <Gamepad>/buttonSouth
 --- !u!222 &819478447358925514
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -456,7 +498,6 @@ GameObject:
   - component: {fileID: 640738250513871933}
   - component: {fileID: 5153348700820668935}
   - component: {fileID: 4409384902916216366}
-  - component: {fileID: 9102652461942946901}
   m_Layer: 5
   m_Name: GameplayWindow
   m_TagString: Untagged
@@ -573,20 +614,3 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &9102652461942946901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8723820770652349129}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
