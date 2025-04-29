@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,11 @@ namespace Arenar.Character
     public class CollisionObserver : MonoBehaviour
     {
         private const string GROUND_LAYER = "Ground";
+        private const string CHARACTER_LAYER = "Character";
+
+
+        public event Action<ICharacterEntity> onTriggerCharacter;
+        
         
         [SerializeField]
         private float maxGroundAngle = 50f;
@@ -20,6 +26,9 @@ namespace Arenar.Character
         private void OnCollisionEnter2D(Collision2D collision)
         {
             UpdateContacts(collision);
+            
+            if (collision.gameObject.CompareTag(CHARACTER_LAYER))
+                onTriggerCharacter?.Invoke(collision.gameObject.GetComponent<ICharacterEntity>());
         }
 
         private void OnCollisionStay2D(Collision2D collision)

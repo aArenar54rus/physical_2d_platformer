@@ -10,8 +10,6 @@ namespace Arenar.Character
 
 		int Health { get; set; }
 		int HealthMax { get; set; }
-
-
 		void GetDamage(int damage = 1);
 	}
 }

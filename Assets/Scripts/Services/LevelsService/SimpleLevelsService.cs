@@ -53,5 +53,13 @@ namespace Arenar.Services.LevelsService
                 onComplete?.Invoke(sceneContext);
             };
         }
+
+        public void UnloadLastLevel()
+        {
+            if (lastLevelIndex > 0)
+            {
+                SceneManager.UnloadScene(LOCATION_NAME + lastLevelIndex);
+            }
+        }
     }
 }

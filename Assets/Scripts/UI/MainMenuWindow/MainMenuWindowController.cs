@@ -21,6 +21,9 @@ namespace Arenar.Services.UI
             mainMenuWindow = canvasService.GetWindow<MainMenuWindow>();
             
             mainMenuWindow.PlayGameButton.onClick.AddListener(StartGameButtonHandler);
+            
+            mainMenuWindow.OnShowEnd.AddListener(OnWindowShowEnd_SelectElements);
+            mainMenuWindow.OnHideBegin.AddListener(OnWindowHideBegin_DeselectElements);
         }
 
         protected override void OnWindowShowEnd_SelectElements()
@@ -38,8 +41,7 @@ namespace Arenar.Services.UI
             GameData newGameData = new GameData();
             newGameData.levelIndex = 1;
             
-            canvasService.TransitionController.PlayTransition<
-                TransitionCrossFadeCanvasWindowLayerController,MainMenuWindow, GameplayWindow>(true, true,
+            canvasService.TransitionController.PlayTransition<TransitionOverlayCanvasWindowController, MainMenuWindow, GameplayWindow>(false, false,
                 () =>
                 {
                     gameService.StartGame(newGameData);

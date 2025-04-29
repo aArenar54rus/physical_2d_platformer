@@ -32,7 +32,6 @@ RectTransform:
   m_Children:
   - {fileID: 6074149996173746373}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -56,7 +55,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -74,7 +75,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasWindowLayers:
   - {fileID: 6074149996173746375}
-  defaultWindowLayer: {fileID: 6074149996173746375}
+  _animationType: 0
+  _windowAnimator: {fileID: 0}
+  _showAnimationName: 
+  _idleAnimationName: 
+  _hideAnimationName: 
+  _hiddenAnimationName: 
 --- !u!1 &6074149996173746394
 GameObject:
   m_ObjectHideFlags: 0
@@ -109,7 +115,6 @@ RectTransform:
   m_Children:
   - {fileID: 6074149996537097714}
   m_Father: {fileID: 6074149996065963574}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -132,7 +137,7 @@ MonoBehaviour:
   overlayAnimationName: Transition
 --- !u!95 &6074149996173746372
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -149,7 +154,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!223 &2563835700602423474
 Canvas:
   m_ObjectHideFlags: 0
@@ -167,7 +173,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
@@ -219,7 +227,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6074149996173746373}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

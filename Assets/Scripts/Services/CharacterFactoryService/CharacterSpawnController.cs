@@ -54,8 +54,12 @@ namespace Arenar.Services.Creator
         {
             ICharacterEntity characterEntity = null;
 
-            if (createdCharacters.ContainsKey(characterType)
-                && createdCharacters[characterType].Count > 0)
+            if (!createdCharacters.ContainsKey(characterType))
+            {
+                createdCharacters.Add(characterType, new Queue<ICharacterEntity>());
+            }
+
+            if (createdCharacters[characterType].Count > 0)
             {
                 characterEntity = createdCharacters[characterType].Dequeue();
             }
@@ -64,19 +68,27 @@ namespace Arenar.Services.Creator
                 characterEntity = characterFactory.Create(characterType);
                 characterEntity.CharacterTransform.SetParent(CharactersContainer);
             }
-            
+
             characterEntity.CharacterTransform.gameObject.SetActive(true);
             characterEntity.Initialize();
             
+            if (!activeCharacters.ContainsKey(characterType))
+                activeCharacters.Add(characterType, new List<ICharacterEntity>());
+            activeCharacters[characterType].Add(characterEntity);
+            
             if (characterType == CharacterType.Player)
                 OnCreatePlayerCharacter?.Invoke(characterEntity);
-            else OnCreateEnemyCharacter?.Invoke(characterEntity);
+            else
+                OnCreateEnemyCharacter?.Invoke(characterEntity);
 
             return characterEntity;
         }
         
         public void ReturnCharacter(ICharacterEntity characterEntity)
         {
+            characterEntity.DeActivate();
+            characterEntity.DeInitialize();
+            
             if (!createdCharacters.ContainsKey(characterEntity.CharacterType))
                 createdCharacters.Add(characterEntity.CharacterType, new Queue<ICharacterEntity>());
             createdCharacters[characterEntity.CharacterType].Enqueue(characterEntity);
@@ -84,17 +96,15 @@ namespace Arenar.Services.Creator
             if (activeCharacters.ContainsKey(characterEntity.CharacterType))
                 activeCharacters[characterEntity.CharacterType].Remove(characterEntity);
             
-            characterEntity.DeActivate();
-            characterEntity.DeInitialize();
             characterEntity.CharacterTransform.gameObject.SetActive(false);
         }
         
         public void ReturnAllCharacters()
         {
-            var activeCharacters = new Dictionary<CharacterType, List<ICharacterEntity>>(this.activeCharacters);
-            foreach (var activeCharacter in activeCharacters)
+            var localActiveCharacters = new Dictionary<CharacterType, List<ICharacterEntity>>(this.activeCharacters);
+            foreach ((CharacterType _, List<ICharacterEntity> entities) in localActiveCharacters)
             {
-                foreach (var character in activeCharacter.Value)
+                foreach (var character in entities)
                     ReturnCharacter(character);
             }
         }

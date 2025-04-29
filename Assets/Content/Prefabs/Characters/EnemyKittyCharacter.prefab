@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4420108436630084923}
   - component: {fileID: 731421508404225697}
   m_Layer: 0
-  m_Name: KittyCharacter
+  m_Name: EnemyKittyCharacter
   m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characterAnimatorDataStorage:
-    characterData: {fileID: 11400000, guid: 4400c35039374c143a2e014275b67b61, type: 2}
+    characterData: {fileID: 11400000, guid: be0917e12b9d0b54fb872f97479db845, type: 2}
     characterSpriteRenderer: {fileID: 5992281453637148909}
     characterRigidbody2D: {fileID: 8317652016353229066}
     collider2D: {fileID: 4420108436630084923}
@@ -97,7 +97,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: eb6b5c32e2672e8499b0a562448d16e2, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8616352, g: 0.024385754, b: 0.024385754, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

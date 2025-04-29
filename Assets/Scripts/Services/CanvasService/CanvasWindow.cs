@@ -8,134 +8,141 @@ using Zenject;
 namespace Arenar.Services.UI
 {
 	public abstract class CanvasWindow : MonoBehaviour
-    {
-	    private Action onCanvasShowEnd;
-	    private Action onCanvasHideEnd;
+	{
+		private Action onCanvasShowEnd;
+		private Action onCanvasHideEnd;
 	    
 	    
-	    [SerializeField] protected CanvasWindowLayer[] canvasWindowLayers = default;
+		[SerializeField]
+		protected CanvasWindowLayer[] canvasWindowLayers = default;
 	    
-	    [Space(10)]
-	    [SerializeField] private CanvasWindowsLayerAnimationType _animationType;
-	    [SerializeField] private Animator _windowAnimator;
-	    [SerializeField] private string _showAnimationName = default;
-	    [SerializeField] private string _idleAnimationName = default;
-	    [SerializeField] private string _hideAnimationName = default;
-	    [SerializeField] private string _hiddenAnimationName = default;
+		[Space(10)]
+		[SerializeField]
+		private CanvasWindowsLayerAnimationType _animationType;
+		[SerializeField]
+		private Animator _windowAnimator;
+		[SerializeField]
+		private string _showAnimationName = default;
+		[SerializeField]
+		private string _idleAnimationName = default;
+		[SerializeField]
+		private string _hideAnimationName = default;
+		[SerializeField]
+		private string _hiddenAnimationName = default;
 	    
-	    protected Tween _windowAnimationTween;
+		protected Tween _windowAnimationTween;
 
-	    private Canvas canvas;
-	    private Tween animationTween;
+		private Canvas canvas;
+		private Tween animationTween;
 
 
 		public UnityEvent OnShowBegin { get; } = new();
-        public UnityEvent OnShowEnd { get; set; } = new();
-        public UnityEvent OnHideBegin { get; } = new();
-        public UnityEvent OnHideEnd { get; } = new();
+		public UnityEvent OnShowEnd { get; set; } = new();
+		public UnityEvent OnHideBegin { get; } = new();
+		public UnityEvent OnHideEnd { get; } = new();
 
 
 		public virtual bool OverrideSorting => false;
 
-        public Canvas Canvas
-        {
-            get
-            {
-                if (canvas != null)
-                    return canvas;
+		public Canvas Canvas
+		{
+			get
+			{
+				if (canvas != null)
+					return canvas;
 
-                if (gameObject.TryGetComponent<Canvas>(out canvas))
-	                return canvas;
+				if (gameObject.TryGetComponent<Canvas>(out canvas))
+					return canvas;
                 
-                canvas = gameObject.AddComponent<Canvas>();
-                return canvas;
-            }
-        }
+				canvas = gameObject.AddComponent<Canvas>();
+				return canvas;
+			}
+		}
         
         
         
-        public virtual void Initialize()
-        {
-	        foreach (CanvasWindowLayer canvasWindowLayer in canvasWindowLayers)
-		        canvasWindowLayer.Initialize();
-        }
+		public virtual void Initialize()
+		{
+			foreach (CanvasWindowLayer canvasWindowLayer in canvasWindowLayers)
+				canvasWindowLayer.Initialize();
+		}
         
-        public virtual void Show(bool immediately = false, Action OnShowEndCallback = null)
-        {
-	        if (OnShowEndCallback != null)
-		        onCanvasShowEnd = OnShowEndCallback;
+		public virtual void Show(bool immediately = false, Action OnShowEndCallback = null)
+		{
+			if (OnShowEndCallback != null)
+				onCanvasShowEnd = OnShowEndCallback;
 
-            gameObject.SetActive(true);
-            Canvas.enabled = true;
+			gameObject.SetActive(true);
+			Canvas.enabled = true;
 
-            foreach (CanvasWindowLayer canvasWindowLayer in canvasWindowLayers)
-	            canvasWindowLayer.ShowWindowLayerStart();
+			foreach (CanvasWindowLayer canvasWindowLayer in canvasWindowLayers)
+				canvasWindowLayer.ShowWindowLayerStart();
 
-            switch (_animationType)
-            {
-	            case CanvasWindowsLayerAnimationType.None:
-		            OnShowComplete();
-		            break;
+			switch (_animationType)
+			{
+				case CanvasWindowsLayerAnimationType.None:
+					OnShowComplete();
+					break;
 				
-	            case CanvasWindowsLayerAnimationType.Tween:
-		            OnTweenAnimationShowPlay(immediately);
-		            break;
+				case CanvasWindowsLayerAnimationType.Tween:
+					OnTweenAnimationShowPlay(immediately);
+					break;
 				
-	            case CanvasWindowsLayerAnimationType.ClassicUnity:
-		            OnUnityAnimatorShowPlay(immediately);
-		            break;
+				case CanvasWindowsLayerAnimationType.ClassicUnity:
+					OnUnityAnimatorShowPlay(immediately);
+					break;
 				
-	            default:
-		            Debug.LogError("Unknown window animation type: " + _animationType);
-		            OnShowComplete();
-		            break;
-            }
+				default:
+					Debug.LogError("Unknown window animation type: " + _animationType);
+					OnShowComplete();
+					break;
+			}
             
-            OnShowBegin?.Invoke();
-        }
+			OnShowBegin?.Invoke();
+		}
 
-        public virtual void Hide(bool immediately = false, Action onHideEndCallback = null)
-        {
-	        if (onHideEndCallback != null)
-		        onCanvasHideEnd = onHideEndCallback;
+		public virtual void Hide(bool immediately = false, Action onHideEndCallback = null)
+		{
+			if (onHideEndCallback != null)
+				onCanvasHideEnd = onHideEndCallback;
 			
 			foreach (CanvasWindowLayer canvasWindowElement in canvasWindowLayers)
 				canvasWindowElement.HideWindowLayerStart();
 
 			switch (_animationType)
-            {
-	            case CanvasWindowsLayerAnimationType.None:
-		            OnHideComplete();
-		            break;
+			{
+				case CanvasWindowsLayerAnimationType.None:
+					OnHideComplete();
+					break;
 				
-	            case CanvasWindowsLayerAnimationType.Tween:
-		            OnTweenAnimationHidePlay(immediately);
-		            break;
+				case CanvasWindowsLayerAnimationType.Tween:
+					OnTweenAnimationHidePlay(immediately);
+					break;
 				
-	            case CanvasWindowsLayerAnimationType.ClassicUnity:
-		            OnUnityAnimatorHidePlay(immediately);
-		            break;
+				case CanvasWindowsLayerAnimationType.ClassicUnity:
+					OnUnityAnimatorHidePlay(immediately);
+					break;
 				
-	            default:
-		            Debug.LogError("Unknown window animation type: " + _animationType);
-		            OnHideComplete();
-		            break;
-            }
+				default:
+					Debug.LogError("Unknown window animation type: " + _animationType);
+					OnHideComplete();
+					break;
+			}
 			
-            OnHideBegin?.Invoke();
-        }
+			OnHideBegin?.Invoke();
+		}
 
 		public T GetWindowLayer<T>() where T : CanvasWindowLayer
-        {
-            foreach (var canvasWindowElement in canvasWindowLayers)
-            {
-                if (canvasWindowElement is T)
-                    return (T)canvasWindowElement;
-            }
+		{
+			foreach (var canvasWindowElement in canvasWindowLayers)
+			{
+				if (canvasWindowElement is T)
+					return (T)canvasWindowElement;
+			}
 
-            Debug.LogError($"Not found {typeof(T)}.");
-            return null;
-        }
+			Debug.LogError($"Not found {typeof(T)}.");
+			return null;
+		}
 
 		protected virtual void OnTweenAnimationShowPlay(bool isImmediately)
 		{
@@ -201,5 +208,5 @@ namespace Arenar.Services.UI
 
 
 		public class Factory : PlaceholderFactory<UnityEngine.Object, Transform, CanvasWindow> {}
-    }
+	}
 }

@@ -12,6 +12,9 @@ namespace Arenar.Character
         
         
         private ICharacterEntity characterOwner;
+        private ICharacterMovementComponent movementComponent;
+        
+        private CollisionObserver collisionObserver;
         private CharacterData characterData;
         private int health;
 
@@ -30,6 +33,7 @@ namespace Arenar.Character
         {
             this.characterOwner = characterOwner;
             this.characterData = characterDataStorage.Data.CharacterData;
+            collisionObserver = characterDataStorage.Data.CollisionObserver;
         }
 
         public void GetDamage(int damage = 1)
@@ -57,6 +61,9 @@ namespace Arenar.Character
         {
             HealthMax = characterData.Health;
             Health = characterData.Health;
+            characterOwner.TryGetCharacterComponent(out movementComponent);
+
+            collisionObserver.onTriggerCharacter += TriggerCharacterHandler;
         }
         
         public void OnDeactivate()
@@ -64,7 +71,24 @@ namespace Arenar.Character
             OnCharacterChangeHealthValue = null;
             OnCharacterDeath = null;
             
+            collisionObserver.onTriggerCharacter -= TriggerCharacterHandler;
+            
             health = 0;
+        }
+
+
+        private void TriggerCharacterHandler(ICharacterEntity character)
+        {
+            if (character.CharacterType == CharacterType.Player)
+            {
+                return;
+            }
+            
+            movementComponent.Jump();
+
+            var height = character.CharacterTransform.position.y - characterOwner.CharacterTransform.position.y;
+            if (height < 0.5f)
+                GetDamage();
         }
     }
 }
